@@ -577,11 +577,23 @@ impl GameWorld for WorldMap {
                                         if let Some(trainer) = npc_type.trainer.as_ref() {
                                             if let Some(encounter_music) = trainer.music.as_ref() {
                                                 if let Err(err) = if let Some(playing_music) = firecore_game::audio::get_current_music() {
-                                                    if playing_music != firecore_game::audio::get_music_id(encounter_music).unwrap() {
-                                                        firecore_game::audio::play_music_named(encounter_music)
-                                                    } else {
-                                                        Ok(())
+                                                    match firecore_game::audio::get_music_id(encounter_music) {
+                                                        Ok(music) => {
+                                                            if let Some(music) = music {
+                                                                if playing_music != music {
+                                                                    firecore_game::audio::play_music_id(music)
+                                                                } else {
+                                                                    Ok(())
+                                                                }
+                                                            } else {
+                                                                Ok(())
+                                                            }
+                                                        }
+                                                        Err(err) => {
+                                                            Err(err)
+                                                        }
                                                     }
+                                                    
                                                 } else {
                                                     firecore_game::audio::play_music_named(encounter_music)
                                                 } {

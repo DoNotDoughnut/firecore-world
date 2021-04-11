@@ -1,6 +1,6 @@
 [package]
 name = "firecore-world"
-version = "0.4.0-alpha.1"
+version = "0.4.0-alpha.1.1"
 authors = ["Rhys Holloway <rhyswilliamholloway@gmail.com>"]
 edition = "2018"
 publish = false
@@ -9,7 +9,7 @@ publish = false
 
 [dependencies]
 
-firecore-game = { git = "https://github.com/DoNotDoughnut/firecore-game" }
+firecore-game = { git = "https://github.com/DoNotDoughnut/firecore-game", default-features = false }
 # firecore-game = { path = "../firecore-game" }
 
 firecore-world-lib = { git = "https://github.com/DoNotDoughnut/firecore-world-lib" }
